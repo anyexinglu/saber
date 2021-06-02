@@ -1,16 +1,29 @@
 console.log("...inner");
-// import { Readable } from 'stream'
-import * as Stream from "stream";
+import Koa from "koa";
 
-var src = new Stream();
-src.readable = true;
+// import { Readable } from "stream";
+// import * as Stream from "stream";
 
-var dest = new Stream();
-dest.writable = true;
-dest.write = function (data) {
-  console.log(data == "test");
-};
+// async function* generate() {
+//   yield "hello";
+//   yield "streams";
+// }
 
-src.pipe(dest);
+// https://nodejs.org/api/stream.html#stream_stream_readable_from_iterable_options
+// const readable = Readable.from([
+//   '<!DOCTYPE html><html lang="zh-CN">',
+//   `<head></head>`,
+//   `<body>1111</body></html>`,
+// ]);
 
-src.emit("data", "test");
+// readable.on("data", chunk => {
+//   console.log(chunk);
+// });
+
+const app = new Koa();
+
+app.use(async ctx => {
+  ctx.body = "Hello World";
+});
+
+app.listen(3000);
