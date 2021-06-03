@@ -5,6 +5,8 @@ import debug from "debug";
 
 const { Readable } = stream;
 
+//
+console.log("........ss");
 const app = new Koa();
 
 function devStream() {
@@ -21,29 +23,7 @@ function devStream() {
       </head>`,
       `<body>stream mode
       
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    <div>222</div>
-    
-      
-      
+    <div>33</div>
       </body></html>`,
     ]);
 
