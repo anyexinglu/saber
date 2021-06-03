@@ -1,9 +1,10 @@
 console.log("...inner");
 import Koa from "koa";
+
+// 很简单，就是正则命中 path：https://github.com/koajs/route/blob/master/index.js
+// 和 cv 最主要的区别是，后者统一走 render 作为 reqHandler。
 import * as route from "koa-route";
 
-//
-console.log("........ss");
 const app = new Koa();
 
 function devStream() {
