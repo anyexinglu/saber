@@ -2,11 +2,9 @@
  * Module dependencies.
  */
 import { resolve } from "path";
-import fs from "fs";
-console.log("...resolve", resolve, fs);
+import * as fs from "fs";
 
 export default function (path, options?: any) {
-  console.log(11111);
   if (!path) {
     return (ctx, next) => {
       if ("/favicon.ico" != ctx.path) {
@@ -31,8 +29,6 @@ export default function (path, options?: any) {
     if ("/favicon.ico" != ctx.path) {
       return next();
     }
-
-    console.log("........in favicon");
 
     if ("GET" !== ctx.method && "HEAD" !== ctx.method) {
       ctx.status = "OPTIONS" == ctx.method ? 200 : 405;

@@ -4,8 +4,8 @@ import Koa from "koa";
 // 很简单，就是正则命中 path：https://github.com/koajs/route/blob/master/index.js
 // 和 cv 最主要的区别是，后者统一走 render 作为 reqHandler。
 import * as route from "koa-route";
-// import favicon from "./helper/favicon";
-// import * as path from "path";
+import favicon from "./helper/favicon";
+import * as path from "path";
 import errorHandler from "./errorHandler";
 import * as React from "react";
 import * as reactDom from "react-dom/server";
@@ -56,15 +56,14 @@ const main = ctx => {
   ctx.response.type = "html";
 };
 
-// 奇怪自己就没有 favicon.ico 的报错了
-// const appRoot = path.resolve(
-//   path.dirname(require.resolve("koa")),
-//   "..",
-//   "..",
-//   ".."
-// );
+const appRoot = path.resolve(
+  path.dirname(require.resolve("koa")),
+  "..",
+  "..",
+  ".."
+);
 
-// app.use(favicon(appRoot + "/static/favicon.ico"));
+app.use(favicon(appRoot + "/static/favicon.ico"));
 
 app.use(route.get("*", main));
 
