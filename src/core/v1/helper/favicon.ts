@@ -1,4 +1,5 @@
 /**
+ * copy from github "koa-favicon"
  * Module dependencies.
  */
 import { resolve } from "path";
