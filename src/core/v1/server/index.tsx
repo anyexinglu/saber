@@ -1,15 +1,15 @@
 console.log("...inner");
 import Koa from "koa";
-
 // 很简单，就是正则命中 path：https://github.com/koajs/route/blob/master/index.js
 // 和 cv 最主要的区别是，后者统一走 render 作为 reqHandler。
 import * as route from "koa-route";
 import favicon from "./helper/favicon";
-import * as path from "path";
 import errorHandler from "./errorHandler";
 import * as React from "react";
 import * as reactDom from "react-dom/server";
 import Document from "./template/Document";
+import hmr from "./hmr";
+import { appRoot, CLIENT_DIR } from "./constants";
 // import * as serve from "koa-static";
 
 const { renderToString } = reactDom;
@@ -31,11 +31,11 @@ const main = ctx => {
 
   let Page;
   try {
-    Page = require(`./views/${view}`).default;
+    Page = require(CLIENT_DIR + `/views/${view}`).default;
   } catch (e) {
     // Error: Cannot find module './views/12'
     console.log("...e", e);
-    Page = require(`./views/404`).default;
+    Page = require(CLIENT_DIR + `/views/404`).default;
   }
 
   const html = renderToString(
@@ -45,20 +45,32 @@ const main = ctx => {
   ctx.response.type = "html";
 };
 
-const appRoot = path.resolve(
-  path.dirname(require.resolve("koa")),
-  "..",
-  "..",
-  ".."
-);
+let runningApp;
 
-app.use(favicon(appRoot + "/static/favicon.ico"));
+function serve(options) {
+  console.log("...options", options);
+  app.use(favicon(appRoot + "/static/favicon.ico"));
 
-app.use(route.get("*", main));
+  app.use(route.get("*", main));
 
-app.use(errorHandler);
-app.on("error", (err, ctx) => {
-  console.error("server error", err, ctx);
-});
+  app.use(errorHandler);
+  app.on("error", (err, ctx) => {
+    console.error("server error", err, ctx);
+  });
 
-app.listen(3000);
+  app.listen(3000);
+  console.log("...app", app);
+  return app;
+}
+
+function start(options) {
+  runningApp?.close?.();
+  runningApp = serve(options);
+}
+
+function run() {
+  start({});
+  hmr(start);
+}
+
+run();

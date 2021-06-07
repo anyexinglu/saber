@@ -1,9 +1,10 @@
 - [x] render string vs render stream
 - [x] 异常处理 error 展示在页面中，并打印到控制台
 - [x] favicon
-- [ ] server & client hot：vite or webpack
 - [x] design route
   - https://www.liaoxuefeng.com/wiki/1022910821149312/1099849448318080
   - http://www.ruanyifeng.com/blog/2017/08/koa.html
+- [ ] server & client hot：vite or webpack
 - [ ] mock fetch and api
-- [ ] vite
+- [ ] 为什么 about 中的 console.log 没有输出在浏览器段。
+- [ ] 借助 esbuild 实现 js 的打包

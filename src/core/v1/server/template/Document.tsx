@@ -2,7 +2,7 @@ import * as React from "react";
 
 export default function Document({ children }) {
   return (
-    <html class="no-js" lang="">
+    <html className="no-js" lang="">
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
