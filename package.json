@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "v1": "ts-node src/core/v1/server/index.tsx",
+    "v1": "node_modules/.bin/nodemon -x 'node_modules/.bin/ts-node' src/core/v1/server/index.tsx",
     "v1string": "ts-node src/core/v1/server/string.tsx",
     "v1stream": "nodemon --exec 'node --inspect=0.0.0.0:9229 --require ts-node/register src/core/v1/server/stream.tsx'"
   },

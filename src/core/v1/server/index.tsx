@@ -8,7 +8,7 @@ import errorHandler from "./errorHandler";
 import * as React from "react";
 import * as reactDom from "react-dom/server";
 import Document from "./template/Document";
-import hmr from "./hmr";
+// import hmr from "./hmr";
 import { appRoot, CLIENT_DIR } from "./constants";
 // import * as serve from "koa-static";
 
@@ -20,7 +20,7 @@ const main = ctx => {
   // ctx.throw(500);
   const { path } = ctx;
   const regex = new RegExp(`^/([0-9a-zA-Z_-]+)`);
-  console.log("...ctx", path);
+  console.log("...ct小心心x", path);
   // if (["/favicon.ico"].includes(path)) {
   //   return serve(root);
   // }
@@ -59,7 +59,7 @@ function serve(options) {
   });
 
   app.listen(3000);
-  console.log("...app", app);
+  console.log("...apssp", app);
   return app;
 }
 
@@ -70,7 +70,7 @@ function start(options) {
 
 function run() {
   start({});
-  hmr(start);
+  // hmr(start);
 }
 
 run();
