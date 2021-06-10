@@ -8,7 +8,7 @@ import errorHandler from "./errorHandler";
 import * as React from "react";
 import * as reactDom from "react-dom/server";
 import Document from "./template/Document";
-// import hmr from "./hmr";
+import hmr from "./hmr";
 import { appRoot, CLIENT_DIR } from "./constants";
 // import * as serve from "koa-static";
 
@@ -70,7 +70,7 @@ function start(options) {
 
 function run() {
   start({});
-  // hmr(start);
+  hmr(start);
 }
 
 run();

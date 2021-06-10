@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "v1": "node_modules/.bin/nodemon -x 'node_modules/.bin/ts-node' src/core/v1/server/index.tsx",
+    "v1": "ts-node src/core/v1/server/index.tsx",
+    "v1nodemon": "node_modules/.bin/nodemon -x 'node_modules/.bin/ts-node' src/core/v1/server/index.tsx",
     "v1string": "ts-node src/core/v1/server/string.tsx",
     "v1stream": "nodemon --exec 'node --inspect=0.0.0.0:9229 --require ts-node/register src/core/v1/server/stream.tsx'"
   },
   "dependencies": {
-    "chokidar": "^3.5.1",
     "koa": "^2.13.1",
     "os": "^0.1.1",
     "prettier": "^2.3.0",
@@ -17,6 +17,8 @@
     "stream": "^0.0.2"
   },
   "devDependencies": {
+    "chokidar": "^3.5.1",
+    "chalk": "^4.1.1",
     "@types/node": "^15.12.0",
     "debug": "^4.3.1",
     "koa-route": "^3.2.0",
