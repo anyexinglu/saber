@@ -2,6 +2,9 @@ import * as chokidar from "chokidar";
 import * as path from "path";
 import { normalizePath } from "./helper/util";
 import { appRoot } from "./constants";
+import { createWebSocketServer } from "./ws";
+
+const ws = createWebSocketServer();
 
 export default function hmr(start) {
   const watcher = chokidar.watch(path.resolve(appRoot), {
@@ -43,4 +46,18 @@ export async function handleHMRUpdate(
   // server: ViteDevServer
 ): Promise<any> {
   console.log("...file", file);
+
+  const updates = [
+    {
+      acceptedPath: "/src/App.jsx",
+      path: "/src/App.jsx",
+      timestamp: 1623296395130,
+      type: "js-update",
+    },
+  ];
+
+  ws.send({
+    type: "update",
+    updates,
+  });
 }

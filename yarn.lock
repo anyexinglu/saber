@@ -34,10 +34,22 @@
   resolved "https://registry.nlark.com/@tsconfig/node16/download/@tsconfig/node16-1.0.1.tgz#a6ca6a9a0ff366af433f42f5f0e124794ff6b8f1"
   integrity sha1-pspqmg/zZq9DP0L18OEkeU/2uPE=
 
+"@types/node@*":
+  version "15.12.2"
+  resolved "https://registry.nlark.com/@types/node/download/@types/node-15.12.2.tgz#1f2b42c4be7156ff4a6f914b2fb03d05fa84e38d"
+  integrity sha1-HytCxL5xVv9Kb5FLL7A9BfqE440=
+
 "@types/node@^15.12.0":
   version "15.12.0"
   resolved "https://registry.nlark.com/@types/node/download/@types/node-15.12.0.tgz#6a459d261450a300e6865faeddb5af01c3389bb3"
   integrity sha1-akWdJhRQowDmhl+u3bWvAcM4m7M=
+
+"@types/ws@^7.4.4":
+  version "7.4.4"
+  resolved "https://registry.nlark.com/@types/ws/download/@types/ws-7.4.4.tgz?cache=0&sync_timestamp=1621243918611&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fws%2Fdownload%2F%40types%2Fws-7.4.4.tgz#93e1e00824c1de2608c30e6de4303ab3b4c0c9bc"
+  integrity sha1-k+HgCCTB3iYIww5t5DA6s7TAybw=
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1:
   version "1.1.1"
@@ -1304,6 +1316,11 @@ write-file-atomic@^3.0.0:
     is-typedarray "^1.0.0"
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
+
+ws@^7.4.6:
+  version "7.4.6"
+  resolved "https://registry.nlark.com/ws/download/ws-7.4.6.tgz?cache=0&sync_timestamp=1623180787489&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fws%2Fdownload%2Fws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
+  integrity sha1-VlTKjs3u5HwzqaS/bSjivimAN3w=
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
