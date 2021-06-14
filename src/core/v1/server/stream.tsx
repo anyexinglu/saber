@@ -54,7 +54,7 @@ function devStream() {
     ctx.body = result;
   });
 
-  app.listen(3000);
+  app.listen(4000);
 }
 
 devStream();

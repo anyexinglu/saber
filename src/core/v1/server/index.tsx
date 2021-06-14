@@ -3,13 +3,15 @@ import Koa from "koa";
 // 很简单，就是正则命中 path：https://github.com/koajs/route/blob/master/index.js
 // 和 cv 最主要的区别是，后者统一走 render 作为 reqHandler。
 import * as route from "koa-route";
+import * as Path from "path";
 import favicon from "./helper/favicon";
 import errorHandler from "./errorHandler";
 import * as React from "react";
 import * as reactDom from "react-dom/server";
 import Document from "./template/Document";
 import hmr from "./hmr";
-import { appRoot, CLIENT_DIR } from "./constants";
+import { appRoot, CLIENT_DIR, V1_DIR } from "./constants";
+import * as fs from "fs";
 // import * as serve from "koa-static";
 
 const { renderToString } = reactDom;
@@ -27,9 +29,18 @@ const main = ctx => {
 
   const match = path.match(regex);
   console.log("...match", path, match);
-  const view = match?.[1];
+  const view = match?.[1] || "about"; // use about as default
 
   let Page;
+  if (path.includes("client")) {
+    const file = fs.readFileSync(Path.join(V1_DIR, path));
+
+    console.log("....file", file);
+    ctx.type = "application/javascript";
+    ctx.body = file;
+    return;
+  }
+
   try {
     Page = require(CLIENT_DIR + `/views/${view}`).default;
   } catch (e) {
@@ -58,7 +69,7 @@ function serve(options) {
     console.error("server error", err, ctx);
   });
 
-  app.listen(3000);
+  app.listen(4000);
   console.log("...apssp", app);
   return app;
 }

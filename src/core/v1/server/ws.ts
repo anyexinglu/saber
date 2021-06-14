@@ -1,13 +1,13 @@
-import WebSocket from "ws";
+import * as WebSocket from "ws";
 
 export function createWebSocketServer() {
   let wss = new WebSocket.Server({ noServer: true });
 
-  let bufferedError = null;
+  // let bufferedError = null;
   return {
     send(payload) {
       if (payload.type === "error" && !wss.clients.size) {
-        bufferedError = payload;
+        // bufferedError = payload;
         return;
       }
 

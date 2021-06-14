@@ -9,6 +9,7 @@ export default function Document({ children }) {
         <title>Saber</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="module" src="./client/client.ts"></script>
       </head>
       <body>
         <div id="root">{children}</div>
