@@ -1,6 +1,6 @@
 import * as React from "react";
 
 export default function About() {
-  console.log("....about");
-  return <div>about page11</div>;
+  console.log("....abouta");
+  return <div>about page1122</div>;
 }

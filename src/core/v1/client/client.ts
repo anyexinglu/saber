@@ -25,7 +25,6 @@ try {
   socket.onopen = function () {
     // Web Socket 已连接上，使用 send() 方法发送数据
     socket.send("发送数据");
-    alert("数据发送中...");
   };
   // Listen for messages
   socket.onmessage = async ({ data }) => {
@@ -48,6 +47,7 @@ try {
 const base = "/"; //  __BASE__ ||
 
 async function handleMessage(payload) {
+  console.log(`handle Message: `, payload);
   switch (payload.type) {
     case "connected":
       console.log(`[vite] connected.`);
@@ -60,7 +60,8 @@ async function handleMessage(payload) {
       // means the page opened with existing server compile error and the whole
       // module script failed to load (since one of the nested imports is 500).
       // in this case a normal update won't work and a full reload is needed.
-      window.location.reload();
+      console.log("...window.location.reload");
+    // window.location.reload();
     // if (isFirstUpdate && hasErrorOverlay()) {
     //   window.location.reload();
     //   return;
