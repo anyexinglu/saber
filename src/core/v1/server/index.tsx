@@ -69,9 +69,8 @@ function serve(options) {
     console.error("server error", err, ctx);
   });
 
-  app.listen(4000);
-  console.log("...apssp", app);
-  return app;
+  // reference: https://github.com/koajs/koa/blob/master/lib/application.js#L82
+  return app.listen(4000);
 }
 
 function start(options) {
