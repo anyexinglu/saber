@@ -13,14 +13,32 @@ const socketHost = "localhost:4000"; // localhost / 127.0.0.1 is not supported
 // `${
 //   __HMR_HOSTNAME__ || (window.location as any).hostname
 // }:${__HMR_PORT__}`;
+const HMR_HEADER = "saber-hmr";
 
 let socket;
 
 try {
   const url = `${socketProtocol}://${socketHost}`;
   console.log("...socket url", url);
-  socket = new WebSocket(url, "saber-hmr");
-  WebSocket.onerror = function (event) {
+  socket = new WebSocket(url, HMR_HEADER);
+
+  socket.onopen = function () {
+    // Web Socket 已连接上，使用 send() 方法发送数据
+    socket.send("发送数据");
+    alert("数据发送中...");
+  };
+  // Listen for messages
+  socket.onmessage = async ({ data }) => {
+    console.log("Received Message: " + data);
+    handleMessage(JSON.parse(data));
+  };
+
+  socket.onclose = function (event) {
+    // handle error event
+    console.error("WebSocket onClose:", event);
+  };
+  socket.onerror = function (event) {
+    // handle error event
     console.error("WebSocket error observed:", event);
   };
 } catch (e) {
@@ -28,11 +46,6 @@ try {
 }
 
 const base = "/"; //  __BASE__ ||
-
-// Listen for messages
-socket?.addEventListener("message", async ({ data }) => {
-  handleMessage(JSON.parse(data));
-});
 
 async function handleMessage(payload) {
   switch (payload.type) {

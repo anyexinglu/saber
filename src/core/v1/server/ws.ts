@@ -1,7 +1,41 @@
 import * as WebSocket from "ws";
 
-export function createWebSocketServer() {
-  let wss = new WebSocket.Server({ noServer: true });
+const HMR_HEADER = "saber-hmr";
+
+export function createWebSocketServer(wsServer) {
+  let wss = new WebSocket.Server({ noServer: true }); // { noServer: true }
+  // wsServer.on('upgrade', (req, socket, head) => {
+  //   if (req.headers['sec-websocket-protocol'] === HMR_HEADER) {
+  //     wss.handleUpgrade(req, socket, head, (ws) => {
+  //       wss.emit('connection', ws, req)
+  //     })
+  //   }
+  // })
+
+  wsServer.on("upgrade", (req, socket, head) => {
+    console.log("...upgrade");
+    if (req.headers["sec-websocket-protocol"] === HMR_HEADER) {
+      wss.handleUpgrade(req, socket, head, ws => {
+        wss.emit("connection", ws, req);
+      });
+    }
+  });
+
+  wss.on("connection", socket => {
+    console.log(`has connected`);
+    socket.send(JSON.stringify({ type: "connected" }));
+    // if (bufferedError) {
+    //   socket.send(JSON.stringify(bufferedError))
+    //   bufferedError = null
+    // }
+  });
+
+  wss.on("error", (e: Error & { code: string }) => {
+    console.error(`WebSocket error:\n${e.stack || e.message}`);
+    if (e.code !== "EADDRINUSE") {
+      console.error(`WebSocket server error:\n${e.stack || e.message}`);
+    }
+  });
 
   // let bufferedError = null;
   return {
@@ -16,6 +50,28 @@ export function createWebSocketServer() {
         if (client.readyState === WebSocket.OPEN) {
           client.send(stringified);
         }
+      });
+    },
+
+    close() {
+      return new Promise((resolve, reject) => {
+        wss.close(err => {
+          if (err) {
+            reject(err);
+          } else {
+            if (wsServer) {
+              wsServer.close(err => {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve(undefined);
+                }
+              });
+            } else {
+              resolve(undefined);
+            }
+          }
+        });
       });
     },
   };

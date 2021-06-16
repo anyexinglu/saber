@@ -77,11 +77,12 @@ function serve(options) {
 function start(options) {
   runningApp?.close?.();
   runningApp = serve(options);
+  return runningApp;
 }
 
 function run() {
-  start({});
-  hmr(start);
+  const runningApp = start({});
+  hmr(start, runningApp);
 }
 
 run();

@@ -4,9 +4,10 @@ import { normalizePath } from "./helper/util";
 import { appRoot } from "./constants";
 import { createWebSocketServer } from "./ws";
 
-const ws = createWebSocketServer();
+let ws; // = createWebSocketServer();
 
-export default function hmr(start) {
+export default function hmr(start, runningApp) {
+  ws = createWebSocketServer(runningApp);
   const watcher = chokidar.watch(path.resolve(appRoot), {
     ignored: ["**/node_modules/**", "**/.git/**"],
     ignoreInitial: true,
