@@ -39,7 +39,6 @@ export default function (path, options?: any) {
       if (!icon) icon = fs.readFileSync(path);
       ctx.set("Cache-Control", cacheControl);
       ctx.type = mime;
-      console.log("....icon", icon);
       ctx.body = icon;
     }
   };

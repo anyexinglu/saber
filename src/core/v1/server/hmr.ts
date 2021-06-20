@@ -16,13 +16,18 @@ export default function hmr(start, runningApp) {
     // ...watchOptions
   });
 
+  const restartServer = async () => {
+    await runningApp.close();
+    start();
+  };
+
   watcher.on("change", async changeFile => {
     const file = normalizePath(changeFile);
     console.log("...change file...", start, changeFile, file);
     // // invalidate module graph cache on file change
     // moduleGraph.onFileChange(file)
     try {
-      // start({});
+      await restartServer();
       await handleHMRUpdate(file); // TODO: server
     } catch (err) {
       console.log("...ws.send", err);

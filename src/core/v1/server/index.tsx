@@ -15,27 +15,23 @@ import * as fs from "fs";
 // import * as serve from "koa-static";
 
 const { renderToString } = reactDom;
-const app = new Koa();
 // const root = path.join(__dirname);
 
 const main = ctx => {
   // ctx.throw(500);
   const { path } = ctx;
   const regex = new RegExp(`^/([0-9a-zA-Z_-]+)`);
-  console.log("...ct小心心x", path);
   // if (["/favicon.ico"].includes(path)) {
   //   return serve(root);
   // }
 
   const match = path.match(regex);
-  console.log("...match", path, match);
   const view = match?.[1] || "about"; // use about as default
 
   let Page;
   if (path.includes("client")) {
     const file = fs.readFileSync(Path.join(V1_DIR, path));
 
-    console.log("....file", file);
     ctx.type = "application/javascript";
     ctx.body = file;
     return;
@@ -59,6 +55,7 @@ const main = ctx => {
 let runningApp;
 
 function serve(options) {
+  const app = new Koa();
   console.log("...options", options);
   app.use(favicon(appRoot + "/static/favicon.ico"));
 

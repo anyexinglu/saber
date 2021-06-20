@@ -4,7 +4,9 @@
 // const __HMR_PORT__: string = "24678";
 // const __HMR_TIMEOUT__: number = 4000;
 // const __HMR_ENABLE_OVERLAY__: boolean = false;
+// import { ErrorOverlay, overlayId } from "./overlay";
 
+const overlayId = "saber-error-overlay";
 // use server configuration, then fallback to inference
 const socketProtocol = "ws";
 // __HMR_PROTOCOL__ ||
@@ -46,6 +48,14 @@ try {
 
 const base = "/"; //  __BASE__ ||
 
+let isFirstUpdate = true;
+function hasErrorOverlay() {
+  return document.querySelectorAll(overlayId).length;
+}
+function clearErrorOverlay() {
+  document.querySelectorAll(overlayId).forEach(n => n.close());
+}
+
 async function handleMessage(payload) {
   console.log(`handle Message: `, payload);
   switch (payload.type) {
@@ -60,14 +70,15 @@ async function handleMessage(payload) {
       // means the page opened with existing server compile error and the whole
       // module script failed to load (since one of the nested imports is 500).
       // in this case a normal update won't work and a full reload is needed.
-      console.log("...window.location.reload");
-    // window.location.reload();
-    // if (isFirstUpdate && hasErrorOverlay()) {
-    //   window.location.reload();
-    //   return;
-    // } else {
-    //   clearErrorOverlay();
-    //   isFirstUpdate = false;
-    // }
+      console.log("...will update view");
+      window.location.reload();
+      return;
+      if (isFirstUpdate && hasErrorOverlay()) {
+        window.location.reload();
+        return;
+      } else {
+        clearErrorOverlay();
+        isFirstUpdate = false;
+      }
   }
 }
