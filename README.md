@@ -8,3 +8,5 @@
 - [ ] mock fetch and api
 - [ ] 为什么 about 中的 console.log 没有输出在浏览器段。
 - [ ] 借助 esbuild 实现 js 的打包
+- [ ] vite hmr
+  - client build to js
