@@ -17,6 +17,7 @@
     "stream": "^0.0.2"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.3",
     "@types/node": "^15.12.0",
     "@types/ws": "^7.4.4",
     "chalk": "^4.1.1",
