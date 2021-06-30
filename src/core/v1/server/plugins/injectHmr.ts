@@ -1,5 +1,5 @@
 const injectHmr = async (ctx, next) => {
-  console.log("injectHmr", ctx.path);
+  console.log("...injectHmr", ctx.path);
   return next();
 };
 

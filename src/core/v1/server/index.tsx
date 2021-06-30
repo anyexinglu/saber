@@ -60,10 +60,12 @@ function serve(options) {
   console.log("...options", options);
   app.use(favicon(appRoot + "/static/favicon.ico"));
 
-  app.use(route.get("*", main));
+  app.use(injectHmr);
 
   app.use(errorHandler);
-  app.use(injectHmr);
+
+  // should be last use
+  app.use(route.get("*", main));
 
   app.on("error", (err, ctx) => {
     console.error("server error", err, ctx);
