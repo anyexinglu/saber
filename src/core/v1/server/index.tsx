@@ -4,8 +4,9 @@ import Koa from "koa";
 // 和 cv 最主要的区别是，后者统一走 render 作为 reqHandler。
 import * as route from "koa-route";
 import * as Path from "path";
-import favicon from "./helper/favicon";
-import errorHandler from "./errorHandler";
+import favicon from "./plugins/favicon";
+import errorHandler from "./plugins/errorHandler";
+import injectHmr from "./plugins/injectHmr";
 import * as React from "react";
 import * as reactDom from "react-dom/server";
 import Document from "./template/Document";
@@ -62,6 +63,8 @@ function serve(options) {
   app.use(route.get("*", main));
 
   app.use(errorHandler);
+  app.use(injectHmr);
+
   app.on("error", (err, ctx) => {
     console.error("server error", err, ctx);
   });
