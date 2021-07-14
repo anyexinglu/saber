@@ -4,7 +4,7 @@
 - [x] design route
   - https://www.liaoxuefeng.com/wiki/1022910821149312/1099849448318080
   - http://www.ruanyifeng.com/blog/2017/08/koa.html
-- [ ] server & client hot：vite or webpack
+- [ ] server & client hot：vite or webpack（todo：createHotContext 还没通）
 - [ ] mock fetch and api
 - [ ] 为什么 about 中的 console.log 没有输出在浏览器段。
 - [ ] 借助 esbuild 实现 js 的打包

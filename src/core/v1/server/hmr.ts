@@ -55,8 +55,8 @@ export async function handleHMRUpdate(
 
   const updates = [
     {
-      acceptedPath: "/src/App.jsx",
-      path: "/src/App.jsx",
+      acceptedPath: file,
+      path: file,
       timestamp: 1623296395130,
       type: "js-update",
     },
